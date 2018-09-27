@@ -36,7 +36,7 @@ def validate_info():
 	password2_error= ''
 	email_error = ''
 
-	entry_error = "Error: Entry not valid. (0-24 characters with no spaces)"
+	entry_error = "Error: Entry not valid. (4-20 characters with no spaces)"
 	pass_error = "Error: Passwords do not match."
 	email_entry_error = "Error: Not a valid email."
 
