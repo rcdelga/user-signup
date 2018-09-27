@@ -1,9 +1,9 @@
 from flask import Flask, request, redirect, render_template
 import cgi
 
+
 app = Flask(__name__)
 app.config['DEBUG'] = True
-
 
 
 @app.route("/")
@@ -21,7 +21,6 @@ def email_check(data):
 		return True
 	else:
 		return False
-
 
 
 @app.route("/", methods=['POST'])
@@ -42,6 +41,7 @@ def validate_info():
 	email_entry_error = "Error: Not a valid email."
 
 	if not valid_entry(username):
+		username = ''
 		username_error = entry_error
 	if not valid_entry(password1):
 		password1_error = entry_error
@@ -52,14 +52,15 @@ def validate_info():
 		password2_error = pass_error
 	if email:
 		if not email_check(email):
+			email = ''
 			email_error = email_entry_error
 		if not valid_entry(email):
+			email = ''
 			email_error = entry_error
 
 	if not username_error and not password1_error and not password2_error and not email_error:
 		return render_template('signup_success.html',username=username,password1=password1,password2=password2,email=email)
 	return render_template('signup_form.html',username=username,username_error=username_error,password1_error=password1_error,password2_error=password2_error,email_error=email_error,email=email)
-
 
 
 app.run()
